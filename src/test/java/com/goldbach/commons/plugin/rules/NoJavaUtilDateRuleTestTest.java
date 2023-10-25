@@ -1,15 +1,16 @@
 package com.goldbach.commons.plugin.rules;
 
+import static com.goldbach.commons.plugin.rules.NoJavaUtilDateRuleTest.NO_JAVA_UTIL_DATE_VIOLATION_MESSAGE;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.Test;
 
-import com.goldbach.commons.plugin.aut.main.ObjectWithAdateField;
-import com.goldbach.commons.plugin.aut.main.ObjectWithJava8TimeLib;
-import com.goldbach.commons.plugin.aut.main.ObjectWithJavaTextDateFormat;
-import com.goldbach.commons.plugin.aut.main.ObjectWithJavaUtilGregorianCalendar;
+import com.goldbach.aut.main.ObjectWithAdateField;
+import com.goldbach.aut.main.ObjectWithJava8TimeLib;
+import com.goldbach.aut.main.ObjectWithJavaTextDateFormat;
+import com.goldbach.aut.main.ObjectWithJavaUtilGregorianCalendar;
 import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
 
@@ -40,7 +41,7 @@ public class NoJavaUtilDateRuleTestTest {
 		assertThatThrownBy(() -> {
 			classes().should(NoJavaUtilDateRuleTest.notUseJavaUtilDate()).check(classToTest);
 		}).hasMessageContaining(ObjectWithAdateField.class.getName())
-				.hasMessageContaining(NoJavaUtilDateRuleTest.NO_JAVA_UTIL_DATE_VIOLATION_MESSAGE);
+				.hasMessageContaining(NO_JAVA_UTIL_DATE_VIOLATION_MESSAGE);
 
 	}
 

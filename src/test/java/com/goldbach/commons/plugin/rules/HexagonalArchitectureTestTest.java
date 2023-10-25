@@ -2,7 +2,7 @@ package com.goldbach.commons.plugin.rules;
 
 import com.goldbach.commons.plugin.SilentLog;
 import com.goldbach.commons.plugin.utils.ArchUtils;
-import com.goldbach.commons.plugin.aut.test.TestSpecificScopeProvider;
+import com.goldbach.aut.test.TestSpecificScopeProvider;
 import com.goldbach.commons.plugin.Log;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,22 +16,22 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 public class HexagonalArchitectureTestTest {
 
 
-    private String pathForDomainClassUsingSpring = "com/goldbach/commons/plugin/aut/main/myproject/domain/DomainClassUsingSpring.class";
+    private String pathForDomainClassUsingSpring = "com/goldbach/aut/main/myproject/domain/DomainClassUsingSpring.class";
 
-    private String pathForDomainClassAnnotatedWithJson = "com/goldbach/commons/plugin/aut/main/myproject/domain/DomainClassAnnotatedWithJson.class";
+    private String pathForDomainClassAnnotatedWithJson = "com/goldbach/aut/main/myproject/domain/DomainClassAnnotatedWithJson.class";
 
-    private String pathForDomainClassAnnotatedWithLombok = "com/goldbach/commons/plugin/aut/main/myproject/domain/DomainClassAnnotatedWithLombok.class";
+    private String pathForDomainClassAnnotatedWithLombok = "com/goldbach/aut/main/myproject/domain/DomainClassAnnotatedWithLombok.class";
 
 
-    private String pathForDomainClassEndingWithDto = "com/goldbach/commons/plugin/aut/main/myproject/domain/SomeClassDto.class";
+    private String pathForDomainClassEndingWithDto = "com/goldbach/aut/main/myproject/domain/SomeClassDto.class";
 
-    private String pathForDomainClassEndingWithDTO = "com/goldbach/commons/plugin/aut/main/myproject/domain/SomeOtherClassDTO.class";
+    private String pathForDomainClassEndingWithDTO = "com/goldbach/aut/main/myproject/domain/SomeOtherClassDTO.class";
 
-    private String pathForDomainClassEndingWithVo = "com/goldbach/commons/plugin/aut/main/myproject/domain/SomeClassVo.class";
+    private String pathForDomainClassEndingWithVo = "com/goldbach/aut/main/myproject/domain/SomeClassVo.class";
 
-    private String pathForInfraClassUsingSpring = "com/goldbach/commons/plugin/aut/main/myproject/infrastructure/InfraClassUsingSpring.class";
+    private String pathForInfraClassUsingSpring = "com/goldbach/aut/main/myproject/infrastructure/InfraClassUsingSpring.class";
 
-    private String pathForInfraClassUsingConfig = "com/goldbach/commons/plugin/aut/main/myproject/infrastructure/InfraClassUsingConfig.class";
+    private String pathForInfraClassUsingConfig = "com/goldbach/aut/main/myproject/infrastructure/InfraClassUsingConfig.class";
 
 
     private Log silentLogger=new SilentLog();

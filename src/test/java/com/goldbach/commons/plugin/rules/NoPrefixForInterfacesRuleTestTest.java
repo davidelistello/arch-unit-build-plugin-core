@@ -1,8 +1,8 @@
 package com.goldbach.commons.plugin.rules;
 
-import com.goldbach.commons.plugin.aut.main.IInterfaceWithIncorrectName;
-import com.goldbach.commons.plugin.aut.main.InterfaceWithCorrectName;
-import com.goldbach.commons.plugin.aut.main.TotallyGoodInterfaceName;
+import com.goldbach.aut.main.IInterfaceWithIncorrectName;
+import com.goldbach.aut.main.InterfaceWithCorrectName;
+import com.goldbach.aut.main.TotallyGoodInterfaceName;
 import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
 import org.junit.Test;

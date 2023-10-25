@@ -6,16 +6,17 @@
     <version>1.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>ArchUnit plugin core</name>
+    <name>Goldbach ArchUnit plugin core</name>
 
-    <description>Based on Arch-Unit-Plugin core logic for Maven or Gradle ArchUnit plugin</description>
+    <description>The core logic for Maven or Gradle ArchUnit plugin</description>
 
     <developers>
         <developer>
-            <id>davidelistello</id>
+            <id>davide.listello</id>
             <name>Davide Listello</name>
             <email>davide.listello@goldbach.com</email>
         </developer>
+
         <developer>
             <id>arpitgarg9168 </id>
             <name>Arpit Garg</name>
@@ -44,6 +45,25 @@
         </license>
     </licenses>
 
+
+
+    <repositories>
+        <repository>
+            <id>sonatype-snapshots</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
 
     <properties>
@@ -315,10 +335,10 @@
                         </goals>
 
                         <configuration>
-                            <outputDirectory>${project.build.directory}/aut-target/classes/com/societegenerale/aut/main</outputDirectory>
+                            <outputDirectory>${project.build.directory}/aut-target/classes/com/goldbach/aut/main</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${project.build.directory}/test-classes/com/societegenerale/aut/main</directory>
+                                    <directory>${project.build.directory}/test-classes/com/goldbach/aut/main</directory>
                                 </resource>
                             </resources>
                         </configuration>
@@ -331,10 +351,10 @@
                         </goals>
 
                         <configuration>
-                            <outputDirectory>${project.build.directory}/aut-target/test-classes/com/societegenerale/aut/test</outputDirectory>
+                            <outputDirectory>${project.build.directory}/aut-target/test-classes/com/goldbach/aut/test</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${project.build.directory}/test-classes/com/societegenerale/aut/test</directory>
+                                    <directory>${project.build.directory}/test-classes/com/goldbach/aut/test</directory>
                                 </resource>
                             </resources>
                         </configuration>

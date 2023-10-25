@@ -1,12 +1,13 @@
 package com.goldbach.commons.plugin.rules;
 
+import com.goldbach.aut.main.ObjectWithJodaTimeReferences;
+import com.goldbach.aut.test.TestSpecificScopeProvider;
 import com.goldbach.commons.plugin.SilentLog;
 import com.goldbach.commons.plugin.utils.ArchUtils;
-import com.goldbach.commons.plugin.aut.main.ObjectWithJodaTimeReferences;
-import com.goldbach.commons.plugin.aut.test.TestSpecificScopeProvider;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.goldbach.commons.plugin.rules.NoJodaTimeRuleTest.NO_JODA_VIOLATION_MESSAGE;
 import static java.util.Collections.emptySet;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
@@ -15,8 +16,8 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 public class NoJodaTimeRuleTestTest {
 
 
-    private String pathObjectWithJodaTimeReferences = "com/goldbach/commons/plugin/aut/main/ObjectWithJodaTimeReferences.class";
-    private String pathObjectWithJava8Library = "com/goldbach/commons/plugin/aut/main/ObjectWithJava8TimeLib.class";
+    private String pathObjectWithJodaTimeReferences = "com/goldbach/aut/main/ObjectWithJodaTimeReferences.class";
+    private String pathObjectWithJava8Library = "com/goldbach/aut/main/ObjectWithJava8TimeLib.class";
 
     @Before
     public void setup() {
@@ -40,7 +41,7 @@ public class NoJodaTimeRuleTestTest {
 
         assertThat(validationExceptionThrown).hasMessageStartingWith("Architecture Violation")
                 .hasMessageContaining(ObjectWithJodaTimeReferences.class.getName())
-                .hasMessageContaining(NoJodaTimeRuleTest.NO_JODA_VIOLATION_MESSAGE);
+                .hasMessageContaining(NO_JODA_VIOLATION_MESSAGE);
 
     }
 

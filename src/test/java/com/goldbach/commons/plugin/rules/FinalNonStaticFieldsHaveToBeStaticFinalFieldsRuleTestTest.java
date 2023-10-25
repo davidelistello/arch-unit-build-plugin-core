@@ -1,8 +1,8 @@
 package com.goldbach.commons.plugin.rules;
 
+import com.goldbach.aut.test.TestSpecificScopeProvider;
 import com.goldbach.commons.plugin.SilentLog;
 import com.goldbach.commons.plugin.utils.ArchUtils;
-import com.goldbach.commons.plugin.aut.test.TestSpecificScopeProvider;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,9 +11,9 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 
 public class FinalNonStaticFieldsHaveToBeStaticFinalFieldsRuleTestTest {
 
-	private String pathClassWithFinalNonStaticFields = "com/goldbach/commons/plugin/aut/main/ClassWithFinalNonStaticFields.class";
+	private String pathClassWithFinalNonStaticFields = "com/goldbach/aut/main/ClassWithFinalNonStaticFields.class";
 
-	private String pathClassWithStaticFinalFields = "com/goldbach/commons/plugin/aut/main/ClassWithStaticFinalFields.class";
+	private String pathClassWithStaticFinalFields = "com/goldbach/aut/main/ClassWithStaticFinalFields.class";
 
 	@Before
 	public void setup() {

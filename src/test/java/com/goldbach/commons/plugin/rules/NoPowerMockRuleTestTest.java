@@ -2,8 +2,8 @@ package com.goldbach.commons.plugin.rules;
 
 import com.goldbach.commons.plugin.SilentLog;
 import com.goldbach.commons.plugin.utils.ArchUtils;
-import com.goldbach.commons.plugin.aut.test.TestClassWithPowerMock;
-import com.goldbach.commons.plugin.aut.test.TestSpecificScopeProvider;
+import com.goldbach.aut.test.TestClassWithPowerMock;
+import com.goldbach.aut.test.TestSpecificScopeProvider;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,9 +15,9 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 public class NoPowerMockRuleTestTest {
 
 	// testClassWithoutPowerMock
-	private String pathTestClassWithOutJunitAsserts = "com/goldbach/commons/plugin/aut/test/TestClassWithOutJunitAsserts.class";
+	private String pathTestClassWithOutJunitAsserts = "com/goldbach/aut/test/TestClassWithOutJunitAsserts.class";
 
-	private String pathTestClassWithPowerMock = "com/goldbach/commons/plugin/aut/test/TestClassWithPowerMock.class";
+	private String pathTestClassWithPowerMock = "com/goldbach/aut/test/TestClassWithPowerMock.class";
 
 	@Before
 	public void setup() {

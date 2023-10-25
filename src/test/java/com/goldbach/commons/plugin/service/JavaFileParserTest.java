@@ -28,15 +28,15 @@ public class JavaFileParserTest extends AbstractExcludePathTest
     public void canParseJavaFile() throws IOException
     {
         final JavaFileParser.JavaFile fileWithPackage = javaFileParser.parse(getTempJavaFile(), getLogger());
-        assertThat(fileWithPackage.getClassName()).isEqualTo(CLASS_NAME);
-        assertThat(fileWithPackage.getPackageString()).isEqualTo(PACKAGE_NAME);
+        assertThat(fileWithPackage.getClassName()).isEqualTo(AbstractExcludePathTest.CLASS_NAME );
+        assertThat(fileWithPackage.getPackageString()).isEqualTo(AbstractExcludePathTest.PACKAGE_NAME);
     }
 
     @Test
     public void canParseJavaFileWithoutPackage() throws IOException
     {
         final JavaFileParser.JavaFile fileWithoutPackage = javaFileParser.parse(getTempJavaFileWithDefaultPackage(), getLogger());
-        assertThat(fileWithoutPackage.getClassName()).isEqualTo(CLASS_NAME);
+        assertThat(fileWithoutPackage.getClassName()).isEqualTo(AbstractExcludePathTest.CLASS_NAME);
         assertThat(fileWithoutPackage.getPackageString()).isNull();
     }
 
@@ -44,9 +44,9 @@ public class JavaFileParserTest extends AbstractExcludePathTest
     public void canParseJavaFileWithComments() throws IOException
     {
         final JavaFileParser.JavaFile fileWithFileComment = javaFileParser.parse(
-                getTempJavaFileWithFileComment(), getLogger());
-        assertThat(fileWithFileComment.getClassName()).isEqualTo(CLASS_NAME_WITH_FILE_COMMENT);
-        assertThat(fileWithFileComment.getPackageString()).isEqualTo(PACKAGE_NAME);
+                AbstractExcludePathTest.getTempJavaFileWithFileComment(), getLogger());
+        assertThat(fileWithFileComment.getClassName()).isEqualTo(AbstractExcludePathTest.CLASS_NAME_WITH_FILE_COMMENT );
+        assertThat(fileWithFileComment.getPackageString()).isEqualTo(AbstractExcludePathTest.PACKAGE_NAME);
     }
 
 

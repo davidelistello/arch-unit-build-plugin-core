@@ -1,9 +1,9 @@
 package com.goldbach.commons.plugin.rules;
 
+import com.goldbach.aut.test.TestClassWithJunit4Asserts;
+import com.goldbach.aut.test.TestClassWithJunit5Asserts;
+import com.goldbach.aut.test.TestSpecificScopeProvider;
 import com.goldbach.commons.plugin.SilentLog;
-import com.goldbach.commons.plugin.aut.test.TestClassWithJunit4Asserts;
-import com.goldbach.commons.plugin.aut.test.TestClassWithJunit5Asserts;
-import com.goldbach.commons.plugin.aut.test.TestSpecificScopeProvider;
 import com.goldbach.commons.plugin.utils.ArchUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,11 +16,11 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 
 public class NoJunitAssertRuleTestTest {
 
-	private String pathTestClassWithJunit4Asserts = "com/goldbach/commons/plugin/aut/test/TestClassWithJunit4Asserts.class";
+	private String pathTestClassWithJunit4Asserts = "com/goldbach/aut/test/TestClassWithJunit4Asserts.class";
 
-	private String pathTestClassWithJunit5Asserts = "com/goldbach/commons/plugin/aut/test/TestClassWithJunit5Asserts.class";
+	private String pathTestClassWithJunit5Asserts = "com/goldbach/aut/test/TestClassWithJunit5Asserts.class";
 
-	private String pathTestClassWithOutJunitAsserts = "com/goldbach/commons/plugin/aut/test/TestClassWithOutJunitAsserts.class";
+	private String pathTestClassWithOutJunitAsserts = "com/goldbach/aut/test/TestClassWithOutJunitAsserts.class";
 
 	@Before
 	public void setup() {

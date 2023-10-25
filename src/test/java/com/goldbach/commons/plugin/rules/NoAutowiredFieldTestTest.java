@@ -2,8 +2,8 @@ package com.goldbach.commons.plugin.rules;
 
 import com.goldbach.commons.plugin.SilentLog;
 import com.goldbach.commons.plugin.utils.ArchUtils;
-import com.goldbach.commons.plugin.aut.main.ClassWithAutowiredField;
-import com.goldbach.commons.plugin.aut.test.TestSpecificScopeProvider;
+import com.goldbach.aut.main.ClassWithAutowiredField;
+import com.goldbach.aut.test.TestSpecificScopeProvider;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,10 +14,10 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 
 public class NoAutowiredFieldTestTest {
 
-	private String pathTestClassWithAutowiredField = "com/goldbach/commons/plugin/aut/main/ClassWithAutowiredField.class";
+	private String pathTestClassWithAutowiredField = "com/goldbach/aut/main/ClassWithAutowiredField.class";
 
 	// injected fields should not trigger autowired violation - they have their own rule
-	private String pathTestClassWithInjectedField = "com/goldbach/commons/plugin/aut/main/ClassWithInjectedField.class";
+	private String pathTestClassWithInjectedField = "com/goldbach/aut/main/ClassWithInjectedField.class";
 
 	@Before
 	public void setup() {

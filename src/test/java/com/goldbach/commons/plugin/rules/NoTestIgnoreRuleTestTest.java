@@ -1,14 +1,15 @@
 package com.goldbach.commons.plugin.rules;
 
-import com.goldbach.commons.plugin.aut.test.TestClassWithIgnoreAtClassLevel;
-import com.goldbach.commons.plugin.aut.test.TestClassWithIgnoreAtMethodLevel;
-import com.goldbach.commons.plugin.aut.test.TestClassWithJunit5DisabledAtClassLevel;
-import com.goldbach.commons.plugin.aut.test.TestClassWithJunit5DisabledAtMethodLevel;
-import com.goldbach.commons.plugin.aut.test.TestClassWithOutJunitAsserts;
+import com.goldbach.aut.test.TestClassWithIgnoreAtClassLevel;
+import com.goldbach.aut.test.TestClassWithIgnoreAtMethodLevel;
+import com.goldbach.aut.test.TestClassWithJunit5DisabledAtClassLevel;
+import com.goldbach.aut.test.TestClassWithJunit5DisabledAtMethodLevel;
+import com.goldbach.aut.test.TestClassWithOutJunitAsserts;
 import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
 import org.junit.Test;
 
+import static com.goldbach.commons.plugin.rules.NoTestIgnoreRuleTest.NO_JUNIT_IGNORE_VIOLATION_MESSAGE;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
@@ -54,7 +55,7 @@ public class NoTestIgnoreRuleTestTest {
 
                 .hasMessageContaining(TestClassWithJunit5DisabledAtClassLevel.class.getName()+", at class level")
                 .hasMessageContaining(TestClassWithJunit5DisabledAtMethodLevel.class.getName()+" - someDisabledTestWithoutAComment, at method level")
-                .hasMessageContaining(NoTestIgnoreRuleTest.NO_JUNIT_IGNORE_VIOLATION_MESSAGE);
+                .hasMessageContaining(NO_JUNIT_IGNORE_VIOLATION_MESSAGE);
 
     }
 }

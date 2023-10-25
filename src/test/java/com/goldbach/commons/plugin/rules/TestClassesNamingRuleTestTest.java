@@ -1,8 +1,8 @@
 package com.goldbach.commons.plugin.rules;
 
+import com.goldbach.aut.test.TestSpecificScopeProvider;
 import com.goldbach.commons.plugin.SilentLog;
 import com.goldbach.commons.plugin.utils.ArchUtils;
-import com.goldbach.commons.plugin.aut.test.TestSpecificScopeProvider;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,13 +11,13 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 
 public class TestClassesNamingRuleTestTest {
 
-	private String pathTestClassWithIncorrectName1 = "com/goldbach/commons/plugin/aut/test/ClassTestWithIncorrectName1.class";
+	private String pathTestClassWithIncorrectName1 = "com/goldbach/aut/test/ClassTestWithIncorrectName1.class";
 
-	private String pathTestClassWithIncorrectName2 = "com/goldbach/commons/plugin/aut/test/ClassTestWithIncorrectName2.class";
+	private String pathTestClassWithIncorrectName2 = "com/goldbach/aut/test/ClassTestWithIncorrectName2.class";
 
-	private String pathClassWithCorrectName1Test = "com/goldbach/commons/plugin/aut/test/ClassTestWithCorrectName1Test.class";
+	private String pathClassWithCorrectName1Test = "com/goldbach/aut/test/ClassTestWithCorrectName1Test.class";
 
-	private String pathClassWithCorrectName2Test = "com/goldbach/commons/plugin/aut/test/ClassTestWithCorrectName2Test.class";
+	private String pathClassWithCorrectName2Test = "com/goldbach/aut/test/ClassTestWithCorrectName2Test.class";
 
 	@Before
 	public void setup() {

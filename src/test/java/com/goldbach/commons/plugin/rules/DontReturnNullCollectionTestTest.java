@@ -7,19 +7,19 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 
 import com.goldbach.commons.plugin.SilentLog;
 import com.goldbach.commons.plugin.utils.ArchUtils;
-import com.goldbach.commons.plugin.aut.test.TestSpecificScopeProvider;
+import com.goldbach.aut.test.TestSpecificScopeProvider;
 import org.junit.Before;
 import org.junit.Test;
 
 public class DontReturnNullCollectionTestTest {
 
-    String pathObjectWithAmethodReturningAnullList = "com/goldbach/commons/plugin/aut/main/ObjectWithMethodsReturningNullCollections.class";
+    String pathObjectWithAmethodReturningAnullList = "com/goldbach/aut/main/ObjectWithMethodsReturningNullCollections.class";
 
-    String pathProperlyAnnotatedObjectWithAmethodReturningAlist = "com/goldbach/commons/plugin/aut/main/ObjectWithProperlyAnnotatedMethodsReturningCollections.class";
+    String pathProperlyAnnotatedObjectWithAmethodReturningAlist = "com/goldbach/aut/main/ObjectWithProperlyAnnotatedMethodsReturningCollections.class";
 
-    String pathObjectWithLambdasReturningListsInside = "com/goldbach/commons/plugin/aut/main/ObjectWithLambdasReturningListsInside.class";
+    String pathObjectWithLambdasReturningListsInside = "com/goldbach/aut/main/ObjectWithLambdasReturningListsInside.class";
 
-    String pathObjectWithLombokBuilder = "com/goldbach/commons/plugin/aut/main/ObjectWithLombokBuilder.class$ObjectWithLombokBuilderBuilder";
+    String pathObjectWithLombokBuilder = "com/goldbach/aut/main/ObjectWithLombokBuilder.class$ObjectWithLombokBuilderBuilder";
 
     @Before
     public void setup(){
@@ -61,7 +61,7 @@ public class DontReturnNullCollectionTestTest {
     public void shouldNotThrowViolationsOnClassesUsingLombokBuilder() {
 
         assertThatCode(() -> new DontReturnNullCollectionTest()
-            .execute("com/goldbach/commons/plugin/aut/main/lombok_builder", new TestSpecificScopeProvider(),emptySet()))
+            .execute("com/goldbach/aut/main/lombok_builder", new TestSpecificScopeProvider(),emptySet()))
             .doesNotThrowAnyException();
 
     }

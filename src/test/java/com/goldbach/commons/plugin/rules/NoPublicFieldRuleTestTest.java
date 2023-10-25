@@ -2,7 +2,7 @@ package com.goldbach.commons.plugin.rules;
 
 import com.goldbach.commons.plugin.SilentLog;
 import com.goldbach.commons.plugin.utils.ArchUtils;
-import com.goldbach.commons.plugin.aut.test.TestSpecificScopeProvider;
+import com.goldbach.aut.test.TestSpecificScopeProvider;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,9 +11,9 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 
 public class NoPublicFieldRuleTestTest {
 
-	String pathObjectWithNoPublicField = "com/goldbach/commons/plugin/aut/main/ObjectWithNoNonStaticPublicField.class";
+	String pathObjectWithNoPublicField = "com/goldbach/aut/main/ObjectWithNoNonStaticPublicField.class";
 
-	String pathObjectWithPublicField = "com/goldbach/commons/plugin/aut/main/ObjectWithPublicField.class";
+	String pathObjectWithPublicField = "com/goldbach/aut/main/ObjectWithPublicField.class";
 
 	@Before
 	public void setup() {

@@ -1,28 +1,31 @@
 package com.goldbach.commons.plugin.rules;
 
+import com.goldbach.aut.test.TestSpecificScopeProvider;
 import com.goldbach.commons.plugin.SilentLog;
 import com.goldbach.commons.plugin.utils.ArchUtils;
-import com.goldbach.commons.plugin.aut.test.TestSpecificScopeProvider;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.goldbach.commons.plugin.rules.ConstantsAndStaticNonFinalFieldsNamesRuleTest.CONSTANTS_VIOLATION_MESSAGE;
+import static com.goldbach.commons.plugin.rules.ConstantsAndStaticNonFinalFieldsNamesRuleTest.ENUM_CONSTANTS_VIOLATION_MESSAGE;
+import static com.goldbach.commons.plugin.rules.ConstantsAndStaticNonFinalFieldsNamesRuleTest.STATIC_NON_FINAL_FIELDS_VIOLATION_MESSAGE;
 import static java.util.Collections.emptySet;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class ConstantsAndStaticNonFinalFieldsNamesRuleTestTest {
 
-	private String pathClassWithConstantNamesNotWrittenCorrectly = "com/goldbach/commons/plugin/aut/main/ClassWithConstantNamesNotWrittenCorrectly.class";
+	private String pathClassWithConstantNamesNotWrittenCorrectly = "com/goldbach/aut/main/ClassWithConstantNamesNotWrittenCorrectly.class";
 
-	private String pathClassWithConstantNamesWrittenCorrectly = "com/goldbach/commons/plugin/aut/main/ClassWithConstantNamesWrittenCorrectly.class";
+	private String pathClassWithConstantNamesWrittenCorrectly = "com/goldbach/aut/main/ClassWithConstantNamesWrittenCorrectly.class";
 
-	private String pathClassWithStaticNonFinalFieldsNotWrittenCorrectly = "com/goldbach/commons/plugin/aut/main/ClassWithStaticNonFinalFieldsNotWrittenCorrectly.class";
+	private String pathClassWithStaticNonFinalFieldsNotWrittenCorrectly = "com/goldbach/aut/main/ClassWithStaticNonFinalFieldsNotWrittenCorrectly.class";
 
-	private String pathClassWithStaticNonFinalFieldsWrittenCorrectly = "com/goldbach/commons/plugin/aut/main/ClassWithStaticNonFinalFieldsWrittenCorrectly.class";
+	private String pathClassWithStaticNonFinalFieldsWrittenCorrectly = "com/goldbach/aut/main/ClassWithStaticNonFinalFieldsWrittenCorrectly.class";
 
-	private String pathEnumWithValuesNotWrittenCorrectly = "com/goldbach/commons/plugin/aut/main/EnumWithValuesNotWrittenCorrectly.class";
+	private String pathEnumWithValuesNotWrittenCorrectly = "com/goldbach/aut/main/EnumWithValuesNotWrittenCorrectly.class";
 
-	private String pathEnumWithValuesWrittenCorrectly = "com/goldbach/commons/plugin/aut/main/EnumWithValuesWrittenCorrectly.class";
+	private String pathEnumWithValuesWrittenCorrectly = "com/goldbach/aut/main/EnumWithValuesWrittenCorrectly.class";
 
 	@Before
 	public void setup() {
@@ -34,7 +37,7 @@ public class ConstantsAndStaticNonFinalFieldsNamesRuleTestTest {
 	@Test
 	public void shouldThrowViolationsConstants() {
 
-		assertExceptionIsThrown(pathClassWithConstantNamesNotWrittenCorrectly, ConstantsAndStaticNonFinalFieldsNamesRuleTest.CONSTANTS_VIOLATION_MESSAGE);
+		assertExceptionIsThrown(pathClassWithConstantNamesNotWrittenCorrectly, CONSTANTS_VIOLATION_MESSAGE);
 
 	}
 
@@ -49,7 +52,7 @@ public class ConstantsAndStaticNonFinalFieldsNamesRuleTestTest {
 	public void shouldThrowViolationsStaticNonFinalFields() {
 
 		assertExceptionIsThrown(pathClassWithStaticNonFinalFieldsNotWrittenCorrectly,
-				ConstantsAndStaticNonFinalFieldsNamesRuleTest.STATIC_NON_FINAL_FIELDS_VIOLATION_MESSAGE);
+				STATIC_NON_FINAL_FIELDS_VIOLATION_MESSAGE);
 
 	}
 
@@ -63,7 +66,7 @@ public class ConstantsAndStaticNonFinalFieldsNamesRuleTestTest {
 	@Test
 	public void shouldThrowViolationsEnums() {
 
-		assertExceptionIsThrown(pathEnumWithValuesNotWrittenCorrectly, ConstantsAndStaticNonFinalFieldsNamesRuleTest.ENUM_CONSTANTS_VIOLATION_MESSAGE);
+		assertExceptionIsThrown(pathEnumWithValuesNotWrittenCorrectly, ENUM_CONSTANTS_VIOLATION_MESSAGE);
 
 	}
 

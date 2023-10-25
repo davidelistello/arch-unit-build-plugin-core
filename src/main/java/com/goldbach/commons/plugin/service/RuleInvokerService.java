@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collection;
 
+import com.goldbach.commons.plugin.utils.ReflectionUtils;
 import com.goldbach.commons.plugin.Log;
 import com.goldbach.commons.plugin.model.ConfigurableRule;
 import com.goldbach.commons.plugin.model.RootClassFolder;
@@ -13,7 +14,6 @@ import com.goldbach.commons.plugin.utils.ArchUtils;
 import com.tngtech.archunit.core.domain.JavaClasses;
 import org.apache.commons.lang3.StringUtils;
 
-import static com.goldbach.commons.plugin.utils.ReflectionUtils.loadClassWithContextClassLoader;
 import static java.lang.System.lineSeparator;
 import static java.util.Collections.emptySet;
 
@@ -70,7 +70,7 @@ public class RuleInvokerService {
 
     private String invokePreConfiguredRule(String ruleClassName)
             throws IllegalAccessException, InvocationTargetException, InstantiationException {
-        Class<?> ruleClass = loadClassWithContextClassLoader(ruleClassName);
+        Class<?> ruleClass = ReflectionUtils.loadClassWithContextClassLoader(ruleClassName);
 
         ArchRuleTest ruleToExecute;
 

@@ -125,8 +125,6 @@ public class HexagonalArchitectureTest implements ArchRuleTest  {
                 .because(WHEN_FOLLOWING_HEXAGONAL_ARCHITECTURE + "domain classes should use only a limited set of core libraries, ie no external framework")
                 .allowEmptyShould(true)
                 .check(ArchUtils.importAllClassesInPackage(scopePathProvider.getMainClassesPath(), packagePath, excludedPaths));
-
-        log.info("Verification HexagonalArchitectureTest completed !");
     }
 
 

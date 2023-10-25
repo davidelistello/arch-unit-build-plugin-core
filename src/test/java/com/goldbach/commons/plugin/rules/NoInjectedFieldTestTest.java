@@ -1,12 +1,13 @@
 package com.goldbach.commons.plugin.rules;
 
+import com.goldbach.aut.main.ClassWithInjectedField;
+import com.goldbach.aut.test.TestSpecificScopeProvider;
 import com.goldbach.commons.plugin.SilentLog;
 import com.goldbach.commons.plugin.utils.ArchUtils;
-import com.goldbach.commons.plugin.aut.main.ClassWithInjectedField;
-import com.goldbach.commons.plugin.aut.test.TestSpecificScopeProvider;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.goldbach.commons.plugin.rules.NoInjectedFieldTest.NO_INJECTED_FIELD_MESSAGE;
 import static java.util.Collections.emptySet;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
@@ -15,9 +16,9 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 public class NoInjectedFieldTestTest {
 
 	// autowired fields should not trigger injected violations here - there's a separate rule for it 
-	private String pathTestClassWithAutowiredFields = "com/goldbach/commons/plugin/aut/main/ClassWithAutowiredField.class";
+	private String pathTestClassWithAutowiredFields = "com/goldbach/aut/main/ClassWithAutowiredField.class";
 
-	private String pathTestClassWithInjectedField = "com/goldbach/commons/plugin/aut/main/ClassWithInjectedField.class";
+	private String pathTestClassWithInjectedField = "com/goldbach/aut/main/ClassWithInjectedField.class";
 
 	@Before
 	public void setup() {
@@ -39,7 +40,7 @@ public class NoInjectedFieldTestTest {
 		assertThat(validationExceptionThrown).isInstanceOf(AssertionError.class)
 				.hasMessageStartingWith("Architecture Violation").hasMessageContaining("was violated (1 times)")
 				.hasMessageContaining(ClassWithInjectedField.class.getName())
-				.hasMessageContaining(NoInjectedFieldTest.NO_INJECTED_FIELD_MESSAGE);
+				.hasMessageContaining(NO_INJECTED_FIELD_MESSAGE);
 
 	}
 

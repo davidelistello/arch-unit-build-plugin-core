@@ -1,8 +1,8 @@
 package com.goldbach.commons.plugin.rules;
 
+import com.goldbach.aut.test.TestSpecificScopeProvider;
 import com.goldbach.commons.plugin.SilentLog;
 import com.goldbach.commons.plugin.utils.ArchUtils;
-import com.goldbach.commons.plugin.aut.test.TestSpecificScopeProvider;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,11 +11,11 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 
 public class TestMethodsNamingRuleTestTest {
 
-	private String pathMethodWithIncorrectNameTest = "com/goldbach/commons/plugin/aut/test/MethodWithIncorrectNameTest.class";
+	private String pathMethodWithIncorrectNameTest = "com/goldbach/aut/test/MethodWithIncorrectNameTest.class";
 
-	private String pathMethodWithCorrectNameStartingWithShouldTest = "com/goldbach/commons/plugin/aut/test/MethodWithCorrectNameStartingWithShouldTest.class";
+	private String pathMethodWithCorrectNameStartingWithShouldTest = "com/goldbach/aut/test/MethodWithCorrectNameStartingWithShouldTest.class";
 
-	private String pathMethodWithCorrectNameStartingWithTestTest = "com/goldbach/commons/plugin/aut/test/MethodWithCorrectNameStartingWithTestTest.class";
+	private String pathMethodWithCorrectNameStartingWithTestTest = "com/goldbach/aut/test/MethodWithCorrectNameStartingWithTestTest.class";
 
 	@Before
 	public void setup() {
