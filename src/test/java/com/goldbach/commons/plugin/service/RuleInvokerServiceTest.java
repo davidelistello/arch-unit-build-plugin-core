@@ -7,7 +7,7 @@ import com.goldbach.commons.plugin.SilentLog;
 import com.goldbach.commons.plugin.SilentLogWithMemory;
 import com.goldbach.commons.plugin.model.ApplyOn;
 import com.goldbach.commons.plugin.model.RootClassFolder;
-import com.goldbach.commons.plugin.rules.HexagonalArchitectureArchRuleCheck;
+import com.goldbach.commons.plugin.rules.HexagonalArchitectureRuleCheck;
 import com.goldbach.commons.plugin.rules.classesForTests.DummyCustomRule;
 import com.goldbach.aut.test.TestSpecificScopeProvider;
 import com.goldbach.commons.plugin.model.ConfigurableRule;
@@ -30,7 +30,7 @@ public class RuleInvokerServiceTest {
     public void shouldInvokePreConfiguredRuleThatCanLog()
             throws InstantiationException, IllegalAccessException, InvocationTargetException {
 
-        Rules rules = new Rules(Arrays.asList(HexagonalArchitectureArchRuleCheck.class.getName()), emptyList());
+        Rules rules = new Rules(Arrays.asList(HexagonalArchitectureRuleCheck.class.getName()), emptyList());
 
         String errorMessage = ruleInvokerService.invokeRules(rules);
 

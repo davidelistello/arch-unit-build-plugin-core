@@ -25,14 +25,14 @@ public class NoPublicFieldRuleTestTest {
 	@Test(expected = AssertionError.class)
 	public void shouldThrowViolations() {
 
-		new NoPublicFieldRuleArchRuleCheck().execute(pathObjectWithPublicField, new TestSpecificScopeProvider(), emptySet());
+		new NoPublicFieldArchRuleCheck().execute(pathObjectWithPublicField, new TestSpecificScopeProvider(), emptySet());
 
 	}
 
 	@Test
 	public void shouldNotThrowAnyViolationEvenWithPublicStaticFinaField() {
 
-		assertThatCode(() -> new NoPublicFieldRuleArchRuleCheck().execute(pathObjectWithNoPublicField,
+		assertThatCode(() -> new NoPublicFieldArchRuleCheck().execute(pathObjectWithNoPublicField,
 				new TestSpecificScopeProvider(), emptySet())).doesNotThrowAnyException();
 
 	}

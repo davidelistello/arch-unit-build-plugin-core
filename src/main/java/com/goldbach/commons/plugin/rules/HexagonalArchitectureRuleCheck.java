@@ -28,7 +28,7 @@ import static java.util.stream.Collectors.toList;
  * @see <a href="https://github.com/tamedia-adtec/gb-engineering-docs/blob/develop/developer-guide/hexagon_architecture_ddd.adoc"></a>
  *
  */
-public class HexagonalArchitectureArchRuleCheck implements ArchRuleCheck {
+public class HexagonalArchitectureRuleCheck implements ArchRuleCheck {
 
     protected static final String WHEN_FOLLOWING_HEXAGONAL_ARCHITECTURE = "When following hexagonal architecture, ";
     private static final String DOMAIN = "..domain..";
@@ -49,7 +49,7 @@ public class HexagonalArchitectureArchRuleCheck implements ArchRuleCheck {
     //removing the trailing ".." in package names, as we're going to use that list in a "startsWith" comparison
     private static List<String> allowedPackageInDomainPrefix = Arrays.asList(allowedPackageInDomain).stream().map(p -> p.replace("..","")).collect(toList());
 
-    public HexagonalArchitectureArchRuleCheck(Log log){
+    public HexagonalArchitectureRuleCheck(Log log){
         this.log=log;
     }
 

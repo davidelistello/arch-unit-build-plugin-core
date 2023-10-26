@@ -15,7 +15,7 @@ import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.fields;
  * "https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)">Encapsulation</a>
  */
 
-public class NoPublicFieldRuleArchRuleCheck implements ArchRuleCheck {
+public class NoPublicFieldArchRuleCheck implements ArchRuleCheck {
     public static final String NO_PUBLIC_FIELD_VIOLATION_MESSAGE = "you should respect encapsulation";
 
     @Override
