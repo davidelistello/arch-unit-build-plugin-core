@@ -11,7 +11,7 @@ import com.goldbach.aut.test.TestSpecificScopeProvider;
 import org.junit.Before;
 import org.junit.Test;
 
-public class DontReturnNullCollectionTestTest {
+public class DontReturnNullCollectionTestArchRuleCheck {
 
     String pathObjectWithAmethodReturningAnullList = "com/goldbach/aut/main/ObjectWithMethodsReturningNullCollections.class";
 
@@ -31,7 +31,7 @@ public class DontReturnNullCollectionTestTest {
     public void shouldThrowViolations() {
 
         Throwable validationExceptionThrown = catchThrowable(() ->
-            new DontReturnNullCollectionTest().execute(pathObjectWithAmethodReturningAnullList, new TestSpecificScopeProvider(), emptySet())
+            new DontReturnNullCollectionArchRuleCheck().execute(pathObjectWithAmethodReturningAnullList, new TestSpecificScopeProvider(), emptySet())
         );
 
         assertThat(validationExceptionThrown).isInstanceOf(AssertionError.class)
@@ -42,7 +42,7 @@ public class DontReturnNullCollectionTestTest {
     @Test
     public void shouldNotThrowViolations() {
 
-        assertThatCode(() -> new DontReturnNullCollectionTest().execute(pathProperlyAnnotatedObjectWithAmethodReturningAlist, new TestSpecificScopeProvider(),emptySet()))
+        assertThatCode(() -> new DontReturnNullCollectionArchRuleCheck().execute(pathProperlyAnnotatedObjectWithAmethodReturningAlist, new TestSpecificScopeProvider(),emptySet()))
                 .doesNotThrowAnyException();
 
     }
@@ -51,7 +51,7 @@ public class DontReturnNullCollectionTestTest {
     @Test
     public void shouldNotThrowViolationsOnLambdas() {
 
-        assertThatCode(() -> new DontReturnNullCollectionTest()
+        assertThatCode(() -> new DontReturnNullCollectionArchRuleCheck()
             .execute(pathObjectWithLambdasReturningListsInside, new TestSpecificScopeProvider(),emptySet()))
             .doesNotThrowAnyException();
 
@@ -60,7 +60,7 @@ public class DontReturnNullCollectionTestTest {
     @Test
     public void shouldNotThrowViolationsOnClassesUsingLombokBuilder() {
 
-        assertThatCode(() -> new DontReturnNullCollectionTest()
+        assertThatCode(() -> new DontReturnNullCollectionArchRuleCheck()
             .execute("com/goldbach/aut/main/lombok_builder", new TestSpecificScopeProvider(),emptySet()))
             .doesNotThrowAnyException();
 

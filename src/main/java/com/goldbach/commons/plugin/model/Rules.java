@@ -5,6 +5,9 @@ import java.util.List;
 
 public class Rules {
 
+    private List<String> preConfiguredRules = new ArrayList<>();
+    private List<ConfigurableRule> configurableRules = new ArrayList<>();
+
     public Rules() {
         //no arg constructor required by Maven when running the plugin
     }
@@ -14,16 +17,20 @@ public class Rules {
         this.configurableRules = configurableRules;
     }
 
-    private List<String> preConfiguredRules= new ArrayList<>();
-
-    private List<ConfigurableRule> configurableRules= new ArrayList<>();
-
     public List<String> getPreConfiguredRules() {
         return preConfiguredRules;
     }
 
+    public void setPreConfiguredRules(List<String> preConfiguredRules) {
+        this.preConfiguredRules = preConfiguredRules;
+    }
+
     public List<ConfigurableRule> getConfigurableRules() {
         return configurableRules;
+    }
+
+    public void setConfigurableRules(List<ConfigurableRule> configurableRules) {
+        this.configurableRules = configurableRules;
     }
 
     public boolean isValid() {
@@ -36,13 +43,5 @@ public class Rules {
 
     public boolean hasSomeConfigurableRules() {
         return !configurableRules.isEmpty();
-    }
-
-    public void setPreConfiguredRules(List<String> preConfiguredRules) {
-        this.preConfiguredRules = preConfiguredRules;
-    }
-
-    public void setConfigurableRules(List<ConfigurableRule> configurableRules) {
-        this.configurableRules = configurableRules;
     }
 }

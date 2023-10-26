@@ -4,11 +4,8 @@ import java.util.Collection;
 
 import com.goldbach.commons.plugin.service.ScopePathProvider;
 
-/**
- * Created by agarg020917 on 11/10/2017.
- */
 @FunctionalInterface
-public interface ArchRuleTest {
+public interface ArchRuleCheck {
 
   /**
    *

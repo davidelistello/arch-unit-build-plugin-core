@@ -4,8 +4,8 @@ import org.junit.Test;
 
 public class ClassTestWithCorrectName1Test {
 
-	@Test
-	public void check() {
-	}
+    @Test
+    public void check() {
+    }
 
 }

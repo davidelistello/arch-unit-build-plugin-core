@@ -6,14 +6,14 @@ import com.goldbach.commons.plugin.utils.ArchUtils;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.goldbach.commons.plugin.rules.ConstantsAndStaticNonFinalFieldsNamesRuleTest.CONSTANTS_VIOLATION_MESSAGE;
-import static com.goldbach.commons.plugin.rules.ConstantsAndStaticNonFinalFieldsNamesRuleTest.ENUM_CONSTANTS_VIOLATION_MESSAGE;
-import static com.goldbach.commons.plugin.rules.ConstantsAndStaticNonFinalFieldsNamesRuleTest.STATIC_NON_FINAL_FIELDS_VIOLATION_MESSAGE;
+import static com.goldbach.commons.plugin.rules.ConstantsAndStaticNonFinalFieldsNamesArchRuleCheck.CONSTANTS_VIOLATION_MESSAGE;
+import static com.goldbach.commons.plugin.rules.ConstantsAndStaticNonFinalFieldsNamesArchRuleCheck.ENUM_CONSTANTS_VIOLATION_MESSAGE;
+import static com.goldbach.commons.plugin.rules.ConstantsAndStaticNonFinalFieldsNamesArchRuleCheck.STATIC_NON_FINAL_FIELDS_VIOLATION_MESSAGE;
 import static java.util.Collections.emptySet;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class ConstantsAndStaticNonFinalFieldsNamesRuleTestTest {
+public class ConstantsAndStaticNonFinalFieldsNamesArchRuleTestCheck {
 
 	private String pathClassWithConstantNamesNotWrittenCorrectly = "com/goldbach/aut/main/ClassWithConstantNamesNotWrittenCorrectly.class";
 
@@ -80,14 +80,14 @@ public class ConstantsAndStaticNonFinalFieldsNamesRuleTestTest {
 	private void assertExceptionIsThrown(String packagePath, String violationMessage) {
 
 		assertThatThrownBy(() -> {
-			new ConstantsAndStaticNonFinalFieldsNamesRuleTest().execute(packagePath, new TestSpecificScopeProvider(), emptySet());
+			new ConstantsAndStaticNonFinalFieldsNamesArchRuleCheck().execute(packagePath, new TestSpecificScopeProvider(), emptySet());
 		}).hasMessageContaining(violationMessage);
 
 	}
 
 	private void assertNoExceptionIsThrown(String path) {
 
-		assertThatCode(() -> new ConstantsAndStaticNonFinalFieldsNamesRuleTest().execute(path, new TestSpecificScopeProvider(), emptySet()))
+		assertThatCode(() -> new ConstantsAndStaticNonFinalFieldsNamesArchRuleCheck().execute(path, new TestSpecificScopeProvider(), emptySet()))
 				.doesNotThrowAnyException();
 
 	}

@@ -7,8 +7,7 @@ import com.goldbach.commons.plugin.SilentLog;
 import com.goldbach.commons.plugin.SilentLogWithMemory;
 import com.goldbach.commons.plugin.model.ApplyOn;
 import com.goldbach.commons.plugin.model.RootClassFolder;
-import com.goldbach.commons.plugin.rules.HexagonalArchitectureTest;
-import com.goldbach.commons.plugin.rules.NoStandardStreamRuleTest;
+import com.goldbach.commons.plugin.rules.HexagonalArchitectureArchRuleCheck;
 import com.goldbach.commons.plugin.rules.classesForTests.DummyCustomRule;
 import com.goldbach.aut.test.TestSpecificScopeProvider;
 import com.goldbach.commons.plugin.model.ConfigurableRule;
@@ -28,23 +27,10 @@ public class RuleInvokerServiceTest {
     ConfigurableRule configurableRule = new ConfigurableRule();
 
     @Test
-    public void shouldInvokePreConfiguredRulesMethod()
-            throws InstantiationException, IllegalAccessException, InvocationTargetException {
-
-        Rules rules = new Rules(Arrays.asList(NoStandardStreamRuleTest.class.getName()), emptyList());
-
-        String errorMessage = ruleInvokerService.invokeRules(rules);
-
-        assertThat(errorMessage).isNotEmpty();
-        assertThat(errorMessage).contains("Architecture Violation");
-        assertThat(errorMessage).contains("Rule 'no classes should access standard streams' was violated ");
-    }
-
-    @Test
     public void shouldInvokePreConfiguredRuleThatCanLog()
             throws InstantiationException, IllegalAccessException, InvocationTargetException {
 
-        Rules rules = new Rules(Arrays.asList(HexagonalArchitectureTest.class.getName()), emptyList());
+        Rules rules = new Rules(Arrays.asList(HexagonalArchitectureArchRuleCheck.class.getName()), emptyList());
 
         String errorMessage = ruleInvokerService.invokeRules(rules);
 

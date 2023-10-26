@@ -5,11 +5,11 @@ import java.util.Set;
 
 public class ObjectWithMethodsReturningNullCollections {
 
-	public List returningANullList(){
-		return null;
-	}
+    public List returningANullList() {
+        return null;
+    }
 
-	public Set returningANullSet(){
-		return null;
-	}
+    public Set returningANullSet() {
+        return null;
+    }
 }

@@ -1,7 +1,7 @@
 package com.goldbach.commons.plugin;
 
 public interface Log {
-    
+
     boolean isInfoEnabled();
 
     boolean isDebugEnabled();

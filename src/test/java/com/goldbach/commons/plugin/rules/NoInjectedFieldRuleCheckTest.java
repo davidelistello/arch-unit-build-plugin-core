@@ -7,13 +7,13 @@ import com.goldbach.commons.plugin.utils.ArchUtils;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.goldbach.commons.plugin.rules.NoInjectedFieldTest.NO_INJECTED_FIELD_MESSAGE;
+import static com.goldbach.commons.plugin.rules.NoInjectedFieldArchRuleCheck.NO_INJECTED_FIELD_MESSAGE;
 import static java.util.Collections.emptySet;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
-public class NoInjectedFieldTestTest {
+public class NoInjectedFieldRuleCheckTest {
 
 	// autowired fields should not trigger injected violations here - there's a separate rule for it 
 	private String pathTestClassWithAutowiredFields = "com/goldbach/aut/main/ClassWithAutowiredField.class";
@@ -32,7 +32,7 @@ public class NoInjectedFieldTestTest {
 
 		Throwable validationExceptionThrown = catchThrowable(() -> {
 
-			new NoInjectedFieldTest().execute(pathTestClassWithInjectedField, new TestSpecificScopeProvider(),
+			new NoInjectedFieldArchRuleCheck().execute(pathTestClassWithInjectedField, new TestSpecificScopeProvider(),
 					emptySet());
 
 		});
@@ -46,7 +46,7 @@ public class NoInjectedFieldTestTest {
 
 	@Test
 	public void shouldNotThrowAnyViolation() {
-		assertThatCode(() -> new NoInjectedFieldTest().execute(pathTestClassWithAutowiredFields,
+		assertThatCode(() -> new NoInjectedFieldArchRuleCheck().execute(pathTestClassWithAutowiredFields,
 				new TestSpecificScopeProvider(), emptySet())).doesNotThrowAnyException();
 	}
 

@@ -1,18 +1,18 @@
 package com.goldbach.commons.plugin.service;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.Collection;
-
-import com.goldbach.commons.plugin.utils.ReflectionUtils;
 import com.goldbach.commons.plugin.Log;
 import com.goldbach.commons.plugin.model.ConfigurableRule;
 import com.goldbach.commons.plugin.model.RootClassFolder;
 import com.goldbach.commons.plugin.model.Rules;
-import com.goldbach.commons.plugin.rules.ArchRuleTest;
+import com.goldbach.commons.plugin.rules.ArchRuleCheck;
 import com.goldbach.commons.plugin.utils.ArchUtils;
+import com.goldbach.commons.plugin.utils.ReflectionUtils;
 import com.tngtech.archunit.core.domain.JavaClasses;
 import org.apache.commons.lang3.StringUtils;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Collection;
 
 import static java.lang.System.lineSeparator;
 import static java.util.Collections.emptySet;
@@ -24,28 +24,28 @@ public class RuleInvokerService {
 
     private ArchUtils archUtils;
 
-    private ScopePathProvider scopePathProvider=new DefaultScopePathProvider();
+    private ScopePathProvider scopePathProvider = new DefaultScopePathProvider();
 
-    private Collection<String> excludedPaths= emptySet();
+    private Collection<String> excludedPaths = emptySet();
 
     public RuleInvokerService(Log log) {
-        this.log=log;
-        archUtils =new ArchUtils(log);
+        this.log = log;
+        archUtils = new ArchUtils(log);
     }
 
     public RuleInvokerService(Log log, ScopePathProvider scopePathProvider) {
-        this.log=log;
-        archUtils =new ArchUtils(log);
+        this.log = log;
+        archUtils = new ArchUtils(log);
 
-        this.scopePathProvider=scopePathProvider;
+        this.scopePathProvider = scopePathProvider;
     }
 
-    public RuleInvokerService(Log log, ScopePathProvider scopePathProvider,Collection<String> excludedPaths, String projectBuildDir) {
-        this.log=log;
-        archUtils =new ArchUtils(log);
+    public RuleInvokerService(Log log, ScopePathProvider scopePathProvider, Collection<String> excludedPaths, String projectBuildDir) {
+        this.log = log;
+        archUtils = new ArchUtils(log);
 
-        this.scopePathProvider=scopePathProvider;
-        this.excludedPaths=new ExcludedPathsPreProcessor().processExcludedPaths(log, projectBuildDir, excludedPaths);
+        this.scopePathProvider = scopePathProvider;
+        this.excludedPaths = new ExcludedPathsPreProcessor().processExcludedPaths(log, projectBuildDir, excludedPaths);
     }
 
 
@@ -72,21 +72,20 @@ public class RuleInvokerService {
             throws IllegalAccessException, InvocationTargetException, InstantiationException {
         Class<?> ruleClass = ReflectionUtils.loadClassWithContextClassLoader(ruleClassName);
 
-        ArchRuleTest ruleToExecute;
+        ArchRuleCheck ruleToExecute;
 
-        try{
+        try {
             //sometimes, rules need to log - if they do, they should provide a constructor that accepts a Log...
-            ruleToExecute= (ArchRuleTest) ruleClass.getConstructor(Log.class).newInstance(log);
-        }
-        catch(NoSuchMethodException e){
+            ruleToExecute = (ArchRuleCheck) ruleClass.getConstructor(Log.class).newInstance(log);
+        } catch (NoSuchMethodException e) {
             //.. otherwise, we use the default constructor with no param
-            ruleToExecute= (ArchRuleTest)ruleClass.newInstance();
+            ruleToExecute = (ArchRuleCheck) ruleClass.newInstance();
         }
 
         String errorMessage = "";
         try {
             Method method = ruleClass.getDeclaredMethod(EXECUTE_METHOD_NAME, String.class, ScopePathProvider.class, Collection.class);
-            method.invoke(ruleToExecute, "", scopePathProvider,excludedPaths);
+            method.invoke(ruleToExecute, "", scopePathProvider, excludedPaths);
         } catch (ReflectiveOperationException re) {
             errorMessage = re.getCause().toString();
         }
@@ -94,19 +93,19 @@ public class RuleInvokerService {
     }
 
     private String invokeConfigurableRules(ConfigurableRule rule) {
-        if(rule.isSkip()) {
-            if(log.isInfoEnabled()) {
+        if (rule.isSkip()) {
+            if (log.isInfoEnabled()) {
                 log.info("Skipping rule " + rule.getRule());
             }
             return "";
         }
 
-        InvokableRules invokableRules = InvokableRules.of(rule.getRule(), rule.getChecks(),log);
+        InvokableRules invokableRules = InvokableRules.of(rule.getRule(), rule.getChecks(), log);
 
         String fullPathFromRootTopackage = getPackageNameOnWhichToApplyRules(rule);
 
-        log.info("invoking ConfigurableRule "+rule.toString()+" on "+fullPathFromRootTopackage);
-        JavaClasses classes = archUtils.importAllClassesInPackage(new RootClassFolder(""), fullPathFromRootTopackage,excludedPaths);
+        log.info("invoking ConfigurableRule " + rule.toString() + " on " + fullPathFromRootTopackage);
+        JavaClasses classes = archUtils.importAllClassesInPackage(new RootClassFolder(""), fullPathFromRootTopackage, excludedPaths);
 
         InvokableRules.InvocationResult result = invokableRules.invokeOn(classes);
         return result.getMessage();
@@ -119,12 +118,11 @@ public class RuleInvokerService {
         if (rule.getApplyOn() != null) {
             if (rule.getApplyOn().getScope() != null && "test".equals(rule.getApplyOn().getScope())) {
                 packageNameBuilder.append(scopePathProvider.getTestClassesPath().getValue());
-            }
-            else{
+            } else {
                 packageNameBuilder.append(scopePathProvider.getMainClassesPath().getValue());
             }
 
-            if(!packageNameBuilder.toString().endsWith("/")){
+            if (!packageNameBuilder.toString().endsWith("/")) {
                 packageNameBuilder.append("/");
             }
 

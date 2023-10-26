@@ -9,14 +9,14 @@ import static java.util.Collections.emptySet;
 
 public class ObjectWithProperlyAnnotatedMethodsReturningCollections {
 
-	@Nonnull
-	public List returningANullList(){
-		return emptyList();
-	}
+    @Nonnull
+    public List returningANullList() {
+        return emptyList();
+    }
 
-	@Nonnull
-	public Set returningANullSet(){
-		return emptySet();
-	}
+    @Nonnull
+    public Set returningANullSet() {
+        return emptySet();
+    }
 
 }

@@ -11,9 +11,6 @@ public class DotsToSlashesReplacer {
      */
     static String replace(String input) {
 
-        //TODO this is really hack-ish.. should be replaced by a regexp based solution
-        // unit test is there to help with implementation
-
         if (input.startsWith("..")) {
             return ".." + input.substring(2).replace(".", "/");
         } else if (input.startsWith(".")) {

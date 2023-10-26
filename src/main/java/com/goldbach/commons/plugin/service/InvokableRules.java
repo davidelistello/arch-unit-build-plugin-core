@@ -1,25 +1,18 @@
 package com.goldbach.commons.plugin.service;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Member;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.function.Predicate;
-
+import com.goldbach.commons.plugin.Log;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
-import com.goldbach.commons.plugin.Log;
 import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.lang.ArchRule;
 
-import static com.goldbach.commons.plugin.utils.ReflectionUtils.getValue;
-import static com.goldbach.commons.plugin.utils.ReflectionUtils.invoke;
-import static com.goldbach.commons.plugin.utils.ReflectionUtils.loadClassWithContextClassLoader;
-import static com.goldbach.commons.plugin.utils.ReflectionUtils.newInstance;
+import java.lang.reflect.Field;
+import java.lang.reflect.Member;
+import java.lang.reflect.Method;
+import java.util.*;
+import java.util.function.Predicate;
+
+import static com.goldbach.commons.plugin.utils.ReflectionUtils.*;
 import static java.lang.System.lineSeparator;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.joining;
@@ -34,7 +27,7 @@ class InvokableRules {
 
     private InvokableRules(String rulesClassName, List<String> ruleChecks, Log log) {
 
-        this.log=log;
+        this.log = log;
 
         rulesLocation = loadClassWithContextClassLoader(rulesClassName);
 
@@ -47,19 +40,23 @@ class InvokableRules {
         archRuleFields = filterNames(allFieldsWhichAreArchRules, isChosenCheck);
         archRuleMethods = filterNames(allMethodsWhichAreArchRules, isChosenCheck);
 
-        if(log.isInfoEnabled()) {
+        if (log.isInfoEnabled()) {
             logBuiltInvokableRules(rulesClassName);
         }
     }
 
+    static InvokableRules of(String rulesClassName, List<String> checks, Log log) {
+        return new InvokableRules(rulesClassName, checks, log);
+    }
+
     private void logBuiltInvokableRules(String rulesClassName) {
 
-        log.info("just built "+rulesClassName+" : ");
+        log.info("just built " + rulesClassName + " : ");
 
-        log.info(archRuleFields.size()+ " field rules loaded ");
+        log.info(archRuleFields.size() + " field rules loaded ");
         archRuleFields.stream().forEach(a -> log.info(a.toString()));
 
-        log.info(archRuleMethods.size()+ " method rules loaded");
+        log.info(archRuleMethods.size() + " method rules loaded");
         archRuleMethods.stream().forEach(a -> log.info(a.toString()));
 
     }
@@ -95,10 +92,10 @@ class InvokableRules {
 
         Object instance = newInstance(rulesLocation);
 
-        if(log.isInfoEnabled()) {
-            log.info("applying rules on "+importedClasses.size()+" classe(s). To see the details, enable debug logs");
+        if (log.isInfoEnabled()) {
+            log.info("applying rules on " + importedClasses.size() + " classe(s). To see the details, enable debug logs");
 
-            if(log.isDebugEnabled()) {
+            if (log.isDebugEnabled()) {
                 importedClasses.stream().forEach(c -> log.debug(c.getName()));
             }
         }
@@ -123,10 +120,6 @@ class InvokableRules {
         } catch (RuntimeException | AssertionError e) {
             return Optional.of(e.getMessage());
         }
-    }
-
-    static InvokableRules of(String rulesClassName, List<String> checks, Log log) {
-        return new InvokableRules(rulesClassName, checks, log);
     }
 
     static class InvocationResult {

@@ -24,8 +24,11 @@ import static java.util.stream.Collectors.toList;
  * Hexagonal architecture is a way to arrange our code to enforce concerns are separated : we want to make sure that core domain code is not polluted by infrastructure code.
  *
  * @see <a href="https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)">Hexagonal architecture on Wikipedia(software)</a>
+ * @see <a href="https://medium.com/ssense-tech/hexagonal-architecture-there-are-always-two-sides-to-every-story-bc0780ed7d9c"</a>
+ * @see <a href="https://github.com/tamedia-adtec/gb-engineering-docs/blob/develop/developer-guide/hexagon_architecture_ddd.adoc"></a>
+ *
  */
-public class HexagonalArchitectureTest implements ArchRuleTest  {
+public class HexagonalArchitectureArchRuleCheck implements ArchRuleCheck {
 
     protected static final String WHEN_FOLLOWING_HEXAGONAL_ARCHITECTURE = "When following hexagonal architecture, ";
     private static final String DOMAIN = "..domain..";
@@ -46,7 +49,7 @@ public class HexagonalArchitectureTest implements ArchRuleTest  {
     //removing the trailing ".." in package names, as we're going to use that list in a "startsWith" comparison
     private static List<String> allowedPackageInDomainPrefix = Arrays.asList(allowedPackageInDomain).stream().map(p -> p.replace("..","")).collect(toList());
 
-    public HexagonalArchitectureTest(Log log){
+    public HexagonalArchitectureArchRuleCheck(Log log){
         this.log=log;
     }
 

@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
 
-public class HexagonalArchitectureTestTest {
+public class HexagonalArchitectureRuleCheckTest {
 
 
     private String pathForDomainClassUsingSpring = "com/goldbach/aut/main/myproject/domain/DomainClassUsingSpring.class";
@@ -48,7 +48,7 @@ public class HexagonalArchitectureTestTest {
 
         Throwable validationExceptionThrown = catchThrowable(() -> {
 
-            new HexagonalArchitectureTest(silentLogger).execute(pathForDomainClassUsingSpring, new TestSpecificScopeProvider(),emptySet());
+            new HexagonalArchitectureArchRuleCheck(silentLogger).execute(pathForDomainClassUsingSpring, new TestSpecificScopeProvider(),emptySet());
 
         });
 
@@ -56,7 +56,7 @@ public class HexagonalArchitectureTestTest {
                 .hasMessageStartingWith("Architecture Violation")
                 .hasMessageContaining("was violated (1 times)")
                 .hasMessageContaining("ClassUsingSpring")
-                .hasMessageContaining(HexagonalArchitectureTest.WHEN_FOLLOWING_HEXAGONAL_ARCHITECTURE)
+                .hasMessageContaining(HexagonalArchitectureArchRuleCheck.WHEN_FOLLOWING_HEXAGONAL_ARCHITECTURE)
                 .hasMessageContaining("domain classes should use only a limited set of core libraries");
 
     }
@@ -66,7 +66,7 @@ public class HexagonalArchitectureTestTest {
 
         Throwable validationExceptionThrown = catchThrowable(() -> {
 
-            new HexagonalArchitectureTest(silentLogger).execute(pathForDomainClassAnnotatedWithJson, new TestSpecificScopeProvider(),emptySet());
+            new HexagonalArchitectureArchRuleCheck(silentLogger).execute(pathForDomainClassAnnotatedWithJson, new TestSpecificScopeProvider(),emptySet());
 
         });
 
@@ -76,7 +76,7 @@ public class HexagonalArchitectureTestTest {
                 .hasMessageStartingWith("Architecture Violation")
                 .hasMessageContaining("was violated (1 times)")
                 .hasMessageContaining("ClassAnnotatedWithJson")
-                .hasMessageContaining(HexagonalArchitectureTest.WHEN_FOLLOWING_HEXAGONAL_ARCHITECTURE)
+                .hasMessageContaining(HexagonalArchitectureArchRuleCheck.WHEN_FOLLOWING_HEXAGONAL_ARCHITECTURE)
                 .hasMessageContaining("domain classes should use only a limited set of core libraries");
 
     }
@@ -84,14 +84,14 @@ public class HexagonalArchitectureTestTest {
     @Test
     public void domainClassAnnotatedWithLombokShould_Not_ThrowViolations(){
 
-        assertThatCode(() -> new HexagonalArchitectureTest(silentLogger).execute(pathForDomainClassAnnotatedWithLombok, new TestSpecificScopeProvider(),emptySet())).doesNotThrowAnyException();
+        assertThatCode(() -> new HexagonalArchitectureArchRuleCheck(silentLogger).execute(pathForDomainClassAnnotatedWithLombok, new TestSpecificScopeProvider(),emptySet())).doesNotThrowAnyException();
 
     }
 
     @Test
     public void infraClassUsingSpringFrameworkShould_Not_ThrowViolations() {
 
-        assertThatCode(() -> new NoPublicFieldRuleTest().execute(pathForInfraClassUsingSpring, new TestSpecificScopeProvider(),emptySet()))
+        assertThatCode(() -> new NoPublicFieldRuleArchRuleCheck().execute(pathForInfraClassUsingSpring, new TestSpecificScopeProvider(),emptySet()))
                 .doesNotThrowAnyException();
 
     }
@@ -101,7 +101,7 @@ public class HexagonalArchitectureTestTest {
 
         Throwable validationExceptionThrown = catchThrowable(() -> {
 
-            new HexagonalArchitectureTest(silentLogger).execute(pathForInfraClassUsingConfig, new TestSpecificScopeProvider(),emptySet());
+            new HexagonalArchitectureArchRuleCheck(silentLogger).execute(pathForInfraClassUsingConfig, new TestSpecificScopeProvider(),emptySet());
 
         });
 
@@ -109,7 +109,7 @@ public class HexagonalArchitectureTestTest {
                 .hasMessageStartingWith("Architecture Violation")
                 .hasMessageContaining("was violated (1 times)")
                 .hasMessageContaining("ClassUsingConfig")
-                .hasMessageContaining(HexagonalArchitectureTest.WHEN_FOLLOWING_HEXAGONAL_ARCHITECTURE)
+                .hasMessageContaining(HexagonalArchitectureArchRuleCheck.WHEN_FOLLOWING_HEXAGONAL_ARCHITECTURE)
                 .hasMessageContaining("infrastructure classes should not know about config code");
 
     }
@@ -119,7 +119,7 @@ public class HexagonalArchitectureTestTest {
 
         Throwable validationExceptionThrownForDto = catchThrowable(() -> {
 
-            new HexagonalArchitectureTest(silentLogger).execute(pathForDomainClassEndingWithDto, new TestSpecificScopeProvider(),emptySet());
+            new HexagonalArchitectureArchRuleCheck(silentLogger).execute(pathForDomainClassEndingWithDto, new TestSpecificScopeProvider(),emptySet());
 
         });
 
@@ -128,7 +128,7 @@ public class HexagonalArchitectureTestTest {
 
         Throwable validationExceptionThrownForDTO = catchThrowable(() -> {
 
-            new HexagonalArchitectureTest(silentLogger).execute(pathForDomainClassEndingWithDTO, new TestSpecificScopeProvider(),emptySet());
+            new HexagonalArchitectureArchRuleCheck(silentLogger).execute(pathForDomainClassEndingWithDTO, new TestSpecificScopeProvider(),emptySet());
 
         });
         assertThat(validationExceptionThrownForDTO).as("expecting a violation to be raised for SomeOtherClassDTO in domain").isNotNull();
@@ -140,7 +140,7 @@ public class HexagonalArchitectureTestTest {
 
         Throwable validationExceptionThrownForDto = catchThrowable(() -> {
 
-            new HexagonalArchitectureTest(silentLogger).execute(pathForDomainClassEndingWithVo, new TestSpecificScopeProvider(),emptySet());
+            new HexagonalArchitectureArchRuleCheck(silentLogger).execute(pathForDomainClassEndingWithVo, new TestSpecificScopeProvider(),emptySet());
 
         });
 
@@ -155,7 +155,7 @@ public class HexagonalArchitectureTestTest {
                 .hasMessageStartingWith("Architecture Violation")
                 .hasMessageContaining("was violated (1 times)")
                 .hasMessageContaining(className)
-                .hasMessageContaining(HexagonalArchitectureTest.WHEN_FOLLOWING_HEXAGONAL_ARCHITECTURE)
+                .hasMessageContaining(HexagonalArchitectureArchRuleCheck.WHEN_FOLLOWING_HEXAGONAL_ARCHITECTURE)
                 .hasMessageContaining("DTO / VO classes shouldn't be located in domain, as they are not business oriented");
     }
 

@@ -2,7 +2,7 @@ package com.goldbach.commons.plugin.rules;
 
 import com.goldbach.commons.plugin.SilentLog;
 import com.goldbach.commons.plugin.utils.ArchUtils;
-import com.goldbach.aut.test.TestClassWithPowerMock;
+import com.goldbach.aut.main.ClassWithAutowiredField;
 import com.goldbach.aut.test.TestSpecificScopeProvider;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,12 +12,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
-public class NoPowerMockRuleTestTest {
+public class NoAutowiredFieldRuleCheckTest {
 
-	// testClassWithoutPowerMock
-	private String pathTestClassWithOutJunitAsserts = "com/goldbach/aut/test/TestClassWithOutJunitAsserts.class";
+	private String pathTestClassWithAutowiredField = "com/goldbach/aut/main/ClassWithAutowiredField.class";
 
-	private String pathTestClassWithPowerMock = "com/goldbach/aut/test/TestClassWithPowerMock.class";
+	// injected fields should not trigger autowired violation - they have their own rule
+	private String pathTestClassWithInjectedField = "com/goldbach/aut/main/ClassWithInjectedField.class";
 
 	@Before
 	public void setup() {
@@ -27,26 +27,25 @@ public class NoPowerMockRuleTestTest {
 	}
 
 	@Test
-	public void shouldNotThrowAnyViolation() {
-		assertThatCode(() -> new NoPowerMockRuleTest().execute(pathTestClassWithOutJunitAsserts,
-				new TestSpecificScopeProvider(), emptySet())).doesNotThrowAnyException();
-
-	}
-
-	@Test
 	public void shouldThrowViolations() {
 
 		Throwable validationExceptionThrown = catchThrowable(() -> {
 
-			new NoPowerMockRuleTest().execute(pathTestClassWithPowerMock, new TestSpecificScopeProvider(), emptySet());
-
+			new NoAutowiredFieldArchRuleCheck().execute(pathTestClassWithAutowiredField, new TestSpecificScopeProvider(),
+					emptySet());
 		});
 
 		assertThat(validationExceptionThrown).isInstanceOf(AssertionError.class)
 				.hasMessageStartingWith("Architecture Violation").hasMessageContaining("was violated (1 times)")
-				.hasMessageContaining(TestClassWithPowerMock.class.getName())
-				.hasMessageContaining(NoPowerMockRuleTest.POWER_MOCK_VIOLATION_MESSAGE);
+				.hasMessageContaining(ClassWithAutowiredField.class.getName())
+				.hasMessageContaining(NoAutowiredFieldArchRuleCheck.NO_AUTOWIRED_FIELD_MESSAGE);
 
+	}
+
+	@Test
+	public void shouldNotThrowAnyViolation() {
+		assertThatCode(() -> new NoAutowiredFieldArchRuleCheck().execute(pathTestClassWithInjectedField,
+				new TestSpecificScopeProvider(), emptySet())).doesNotThrowAnyException();
 	}
 
 }
