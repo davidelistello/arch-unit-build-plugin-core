@@ -11,11 +11,11 @@
     <plugins>
       <plugin>
         <groupId>com.gb.cleanarch.inspector</groupId>
-        <artifactId>cleanarch-maven-plugin</artifactId>
+        <artifactId>cleanarch-core-lib</artifactId>
         <configuration>
           <rules>
             <preConfiguredRules>
-              <rule>com.gb.cleanarch.inspector.plugin.gradle.rules.NoStandardStreamRuleTest</rule>
+              <rule>com.gb.cleanarch.inspector.core.lib.rules.NoPublicFieldArchRuleCheck</rule>
             </preConfiguredRules>
           </rules>
         </configuration>

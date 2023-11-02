@@ -17,8 +17,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class ArchUtilsTest {
 
-	// used to define the Path for scanning Base Class used in the Polymorphic-Plugin-Architecture
-	private static final String PACKAGE_NAMESPACE_MODEL_FULL_PATH = "com/gb/cleanarch/inspector/plugin/gradle/model";
+	// used to define the absolute ClassPath for scanning our internal Base-Class used in the Polymorphic-Plugins-Discovery-Design
+	private static final String PACKAGE_NAMESPACE_MODEL_FULL_PATH = "com/gb/cleanarch/inspector/core/lib/model";
 
 	// instantiating to init the static logger in ArchUtils..
 	ArchUtils archUtils = new ArchUtils(new SilentLog());
