@@ -1,0 +1,150 @@
+package com.gb.cleanarch.inspector.core.lib.service;
+
+import com.gb.cleanarch.inspector.core.lib.Log;
+import com.gb.cleanarch.inspector.core.lib.rules.ArchRuleCheck;
+import com.gb.cleanarch.inspector.core.lib.model.ConfigurableRule;
+import com.gb.cleanarch.inspector.core.lib.model.RootClassFolder;
+import com.gb.cleanarch.inspector.core.lib.model.Rules;
+import com.gb.cleanarch.inspector.core.lib.utils.ArchUtils;
+import com.gb.cleanarch.inspector.core.lib.utils.ReflectionUtils;
+import com.tngtech.archunit.core.domain.JavaClasses;
+import org.apache.commons.lang3.StringUtils;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Collection;
+
+import static java.lang.System.lineSeparator;
+import static java.util.Collections.emptySet;
+
+public class RuleInvokerService {
+    private static final String EXECUTE_METHOD_NAME = "execute";
+
+    private Log log;
+
+    private ArchUtils archUtils;
+
+    private ScopePathProvider scopePathProvider = new DefaultScopePathProvider();
+
+    private Collection<String> excludedPaths = emptySet();
+
+    public RuleInvokerService(Log log) {
+        this.log = log;
+        archUtils = new ArchUtils(log);
+    }
+
+    public RuleInvokerService(Log log, ScopePathProvider scopePathProvider) {
+        this.log = log;
+        archUtils = new ArchUtils(log);
+
+        this.scopePathProvider = scopePathProvider;
+    }
+
+    public RuleInvokerService(Log log, ScopePathProvider scopePathProvider, Collection<String> excludedPaths, String projectBuildDir) {
+        this.log = log;
+        archUtils = new ArchUtils(log);
+
+        this.scopePathProvider = scopePathProvider;
+        this.excludedPaths = new ExcludedPathsPreProcessor().processExcludedPaths(log, projectBuildDir, excludedPaths);
+    }
+
+
+    public String invokeRules(Rules rules)
+            throws InvocationTargetException, InstantiationException, IllegalAccessException {
+
+        StringBuilder errorListBuilder = new StringBuilder();
+
+        for (String rule : rules.getPreConfiguredRules()) {
+            String errorMessage = invokePreConfiguredRule(rule);
+            errorListBuilder.append(prepareErrorMessageForRuleFailures(rule, errorMessage));
+        }
+
+        for (ConfigurableRule rule : rules.getConfigurableRules()) {
+            String errorMessage = invokeConfigurableRules(rule);
+            errorListBuilder.append(prepareErrorMessageForRuleFailures(rule.getRule(), errorMessage));
+        }
+
+        return errorListBuilder.toString();
+
+    }
+
+    private String invokePreConfiguredRule(String ruleClassName)
+            throws IllegalAccessException, InvocationTargetException, InstantiationException {
+        Class<?> ruleClass = ReflectionUtils.loadClassWithContextClassLoader(ruleClassName);
+
+        ArchRuleCheck ruleToExecute;
+
+        try {
+            //sometimes, rules need to log - if they do, they should provide a constructor that accepts a Log...
+            ruleToExecute = (ArchRuleCheck) ruleClass.getConstructor(Log.class).newInstance(log);
+        } catch (NoSuchMethodException e) {
+            //.. otherwise, we use the default constructor with no param
+            ruleToExecute = (ArchRuleCheck) ruleClass.newInstance();
+        }
+
+        String errorMessage = "";
+        try {
+            Method method = ruleClass.getDeclaredMethod(EXECUTE_METHOD_NAME, String.class, ScopePathProvider.class, Collection.class);
+            method.invoke(ruleToExecute, "", scopePathProvider, excludedPaths);
+        } catch (ReflectiveOperationException re) {
+            errorMessage = re.getCause().toString();
+        }
+        return errorMessage;
+    }
+
+    private String invokeConfigurableRules(ConfigurableRule rule) {
+        if (rule.isSkip()) {
+            if (log.isInfoEnabled()) {
+                log.info("Skipping rule " + rule.getRule());
+            }
+            return "";
+        }
+
+        InvokableRules invokableRules = InvokableRules.of(rule.getRule(), rule.getChecks(), log);
+
+        String fullPathFromRootTopackage = getPackageNameOnWhichToApplyRules(rule);
+
+        log.info("invoking ConfigurableRule " + rule.toString() + " on " + fullPathFromRootTopackage);
+        JavaClasses classes = archUtils.importAllClassesInPackage(new RootClassFolder(""), fullPathFromRootTopackage, excludedPaths);
+
+        InvokableRules.InvocationResult result = invokableRules.invokeOn(classes);
+        return result.getMessage();
+    }
+
+    private String getPackageNameOnWhichToApplyRules(ConfigurableRule rule) {
+
+        StringBuilder packageNameBuilder = new StringBuilder();
+
+        if (rule.getApplyOn() != null) {
+            if (rule.getApplyOn().getScope() != null && "test".equals(rule.getApplyOn().getScope())) {
+                packageNameBuilder.append(scopePathProvider.getTestClassesPath().getValue());
+            } else {
+                packageNameBuilder.append(scopePathProvider.getMainClassesPath().getValue());
+            }
+
+            if (!packageNameBuilder.toString().endsWith("/")) {
+                packageNameBuilder.append("/");
+            }
+
+            if (rule.getApplyOn().getPackageName() != null) {
+                packageNameBuilder.append(DotsToSlashesReplacer.replace(rule.getApplyOn().getPackageName()));
+            }
+
+        }
+
+        return packageNameBuilder.toString();
+    }
+
+
+    private String prepareErrorMessageForRuleFailures(String rule, String errorMessage) {
+
+        StringBuilder errorBuilder = new StringBuilder();
+        if (StringUtils.isNotEmpty(errorMessage)) {
+            errorBuilder
+                    .append("Rule Violated - ").append(rule).append(lineSeparator())
+                    .append(errorMessage)
+                    .append(lineSeparator());
+        }
+        return errorBuilder.toString();
+    }
+}

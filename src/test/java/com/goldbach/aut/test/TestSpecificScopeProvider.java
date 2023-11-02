@@ -1,7 +1,7 @@
 package com.goldbach.aut.test;
 
-import com.goldbach.commons.plugin.model.RootClassFolder;
-import com.goldbach.commons.plugin.service.ScopePathProvider;
+import com.gb.cleanarch.inspector.core.lib.model.RootClassFolder;
+import com.gb.cleanarch.inspector.core.lib.service.ScopePathProvider;
 
 public class TestSpecificScopeProvider implements ScopePathProvider {
 

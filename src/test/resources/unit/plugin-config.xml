@@ -2,20 +2,20 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.goldbach.commons.plugin</groupId>
-  <artifactId>first</artifactId>
+  <groupId>com.gb.cleanarch.inspector</groupId>
+  <artifactId>test-example</artifactId>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
   <url>https://goldbach.com/</url>
   <build>
     <plugins>
       <plugin>
-        <groupId>com.goldbach.commons</groupId>
-        <artifactId>arch-unit-maven-plugin</artifactId>
+        <groupId>com.gb.cleanarch.inspector</groupId>
+        <artifactId>cleanarch-maven-plugin</artifactId>
         <configuration>
           <rules>
             <preConfiguredRules>
-              <rule>com.goldbach.commons.plugin.rules.NoStandardStreamRuleTest</rule>
+              <rule>com.gb.cleanarch.inspector.plugin.gradle.rules.NoStandardStreamRuleTest</rule>
             </preConfiguredRules>
           </rules>
         </configuration>

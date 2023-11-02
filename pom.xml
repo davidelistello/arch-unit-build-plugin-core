@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.goldbach.commons</groupId>
-    <artifactId>arch-unit-build-plugin-core</artifactId>
+    <groupId>com.gb.cleanarch.inspector</groupId>
+    <artifactId>cleanarch-maven-plugin</artifactId>
     <version>1.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Goldbach ArchUnit plugin core</name>
 
-    <description>The core logic for Maven or Gradle ArchUnit plugin</description>
+    <description>The core logic ArchUnit Maven plugin</description>
 
     <developers>
         <developer>
@@ -16,54 +16,7 @@
             <name>Davide Listello</name>
             <email>davide.listello@goldbach.com</email>
         </developer>
-
-        <developer>
-            <id>arpitgarg9168 </id>
-            <name>Arpit Garg</name>
-            <email>cs.arpit@gmail.com</email>
-        </developer>
-
-        <developer>
-            <id>vincent-fuchs</id>
-            <name>Vincent Fuchs</name>
-            <email>vincent.fuchs@gmail.com</email>
-        </developer>
-
-        <developer>
-            <id>FanJups</id>
-            <name>Fanon Jupkwo</name>
-            <email>jupsfan@gmail.com</email>
-        </developer>
-
     </developers>
-
-    <licenses>
-        <license>
-            <name>Apache 2</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
-
-
-    <repositories>
-        <repository>
-            <id>sonatype-snapshots</id>
-            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-        </repository>
-    </repositories>
-
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
 
 
     <properties>
@@ -156,15 +109,6 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.powermock</groupId>
-            <artifactId>powermock-module-junit4</artifactId>
-            <version>1.7.3</version>
-            <!-- Need to add powerMock as a dependency WITHOUT test scope. This way, we're sure the Powermock classes are part of the plugin, and will be found
-            by the plugin at runtime in different projects. Without it, NoPowerMockRuleTest actually won't work !
-             see https://github.com/TNG/ArchUnit/issues/120
-             -->
-        </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>
